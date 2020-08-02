@@ -148,7 +148,7 @@ const schema = new GraphQLSchema({
       getAllDownloads: {
         type: GraphQLList(DownloadsType),
         args: {
-          count: { type: GraphQLNonNull(GraphQLInt) },
+          count: { type: GraphQLInt },
         },
         resolve: async (parent, args, context, info) => {
           return DownloadsModel.find().limit(args.count).exec();
@@ -166,7 +166,7 @@ const schema = new GraphQLSchema({
       getAllMalwareResults: {
         type: GraphQLList(MalwaresType),
         args: {
-          count: { type: GraphQLNonNull(GraphQLInt) },
+          count: { type: GraphQLInt },
         },
         resolve: async (parent, args, context, info) => {
           return MalwareModel.find().limit(args.count).exec();
@@ -185,7 +185,7 @@ const schema = new GraphQLSchema({
         type: GraphQLList(DownloadsType),
         args: {
           shasum: { type: GraphQLNonNull(GraphQLString) },
-          count: { type: GraphQLNonNull(GraphQLInt) },
+          count: { type: GraphQLInt },
         },
         resolve: async (parent, args, context, info) => {
           return DownloadsModel.find()
@@ -199,7 +199,7 @@ const schema = new GraphQLSchema({
         type: GraphQLList(MalwaresType),
         args: {
           resource: { type: GraphQLNonNull(GraphQLString) },
-          count: { type: GraphQLNonNull(GraphQLInt) },
+          count: { type: GraphQLInt },
         },
         resolve: async (parent, args, context, info) => {
           return MalwareModel.find()
@@ -224,7 +224,7 @@ const schema = new GraphQLSchema({
       getAllIpinfoResults: {
         type: GraphQLList(IpType),
         args: {
-          count: { type: GraphQLNonNull(GraphQLInt) },
+          count: { type: GraphQLInt },
         },
         resolve: async (parent, args, context, info) => {
           return IPModel.find().limit(args.count).exec() 

@@ -4,6 +4,7 @@ const Mongoose = require("mongoose");
 require("dotenv").config();
 const cors = require("cors");
 const schema = require("./Schema");
+const http = require("http");
 
 const startServer = async () => {
   const app = Express();
@@ -35,4 +36,7 @@ const startServer = async () => {
   });
 };
 
-startServer();
+const server = () => {
+  http.createServer(startServer());
+};
+server();
