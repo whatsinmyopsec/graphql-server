@@ -2,7 +2,7 @@ const DownloadsModel = require("./models/DownloadsModel");
 const MalwareModel = require("./models/MalwareModel");
 const IPModel = require("./models/IPModel");
 const {
-  type: GraphQLID,
+  GraphQLID,
   GraphQLBoolean,
   GraphQLString,
   GraphQLList,
@@ -147,8 +147,11 @@ const schema = new GraphQLSchema({
     fields: {
       getAllDownloads: {
         type: GraphQLList(DownloadsType),
-        resolve: () => {
-          return DownloadsModel.find().exec();
+        args: {
+          count: { type: GraphQLNonNull(GraphQLInt) },
+        },
+        resolve: async (parent, args, context, info) => {
+          return DownloadsModel.find().limit(args.count).exec();
         },
       },
       getDownloadByID: {
@@ -162,8 +165,11 @@ const schema = new GraphQLSchema({
       },
       getAllMalwareResults: {
         type: GraphQLList(MalwaresType),
+        args: {
+          count: { type: GraphQLNonNull(GraphQLInt) },
+        },
         resolve: async (parent, args, context, info) => {
-          return MalwareModel.find().exec();
+          return MalwareModel.find().limit(args.count).exec();
         },
       },
       getMalwareByID: {
@@ -217,8 +223,11 @@ const schema = new GraphQLSchema({
       },
       getAllIpinfoResults: {
         type: GraphQLList(IpType),
-        resolve: async () => {
-          return IPModel.find().exec();
+        args: {
+          count: { type: GraphQLNonNull(GraphQLInt) },
+        },
+        resolve: async (parent, args, context, info) => {
+          return IPModel.find().limit(args.count).exec() 
         },
       },
       getAllIpinfosByDate: {
