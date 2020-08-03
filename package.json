@@ -22,5 +22,8 @@
   },
   "keywords": [],
   "author": "Kevin Power",
-  "license": "ISC"
+  "license": "ISC",
+  "engines": {
+    "node": "12.18.3"
+  }
 }
