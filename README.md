@@ -1,5 +1,5 @@
 # graphql-server
-
+### Please star if you clone (☞ﾟヮﾟ)☞
 ## About
 Backend for my graphql server
 
