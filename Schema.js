@@ -145,6 +145,7 @@ const InputType = new GraphQLObjectType({
   name: "Input",
   description: "what did they do to you?",
   fields: {
+    id: { type: GraphQLID },
     sensor: { type: GraphQLString },
     eventid: { type: GraphQLString },
     src_ip: { type: GraphQLString },
