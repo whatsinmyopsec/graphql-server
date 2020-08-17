@@ -1,6 +1,7 @@
 const DownloadsModel = require("./models/DownloadsModel");
 const MalwareModel = require("./models/MalwareModel");
 const IPModel = require("./models/IPModel");
+const InputModel = require("./models/InputModel");
 const {
   GraphQLID,
   GraphQLBoolean,
@@ -140,11 +141,34 @@ const IpType = new GraphQLObjectType({
   },
 });
 
+const InputType = new GraphQLObjectType({
+  name: "Input",
+  description: "what did they do to you?",
+  fields: {
+    sensor: { type: GraphQLString },
+    eventid: { type: GraphQLString },
+    src_ip: { type: GraphQLString },
+    input: { type: GraphQLString },
+    session: { type: GraphQLString },
+    timestamp: { type: GraphQLString },
+    message: { type: GraphQLString },
+  },
+});
+
 const schema = new GraphQLSchema({
   query: new GraphQLObjectType({
     name: "Query",
     description: "root",
     fields: {
+      getAllInputs: {
+        type: GraphQLList(InputType),
+        args: {
+          count: { type: GraphQLInt },
+        },
+        resolve: async (parent, args, context, info) => {
+          return InputModel.find().limit(args.count).exec();
+        },
+      },
       getAllDownloads: {
         type: GraphQLList(DownloadsType),
         args: {
@@ -227,7 +251,7 @@ const schema = new GraphQLSchema({
           count: { type: GraphQLInt },
         },
         resolve: async (parent, args, context, info) => {
-          return IPModel.find().limit(args.count).exec() 
+          return IPModel.find().limit(args.count).exec();
         },
       },
       getAllIpinfosByDate: {
